@@ -2,11 +2,6 @@ package com.dq.admincom.service.impl;
 
 import java.util.List;
 
-
-
-
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,25 +15,24 @@ import com.dq.admincom.model.Taxe;
 import com.dq.admincom.service.BanqueService;
 
 @Service
-@Transactional
-public class BanqueServiceImpl implements BanqueService{
+@Transactional(readOnly=true)
+public class BanqueServiceImpl implements BanqueService {
 
-	
 	@Autowired
 	private TaxeRepository taxeRepository;
 
 	@Autowired
 	private EntrepriseRepository entrepriseRepository;
 
-	@Override
 	
+	@Transactional(readOnly = false)
 	public Entreprise createEntreprise(Entreprise entreprise) {
 
 		return entrepriseRepository.save(entreprise);
 	}
 
-	@Override
 	
+	@Transactional(readOnly = false)
 	public Entreprise deleteEntreprise(Long id) throws EntrepriseNotFound {
 
 		Entreprise entreprise = entrepriseRepository.findOne(id);
@@ -49,15 +43,14 @@ public class BanqueServiceImpl implements BanqueService{
 
 	}
 
-	@Override
 	
 	public List<Entreprise> findAllEntreprise() {
 
 		return entrepriseRepository.findAll();
 	}
 
-	@Override
 	
+	@Transactional(readOnly = false)
 	public Entreprise update(Entreprise entreprise) throws EntrepriseNotFound {
 		Entreprise updatedEntr = entrepriseRepository.findOne(entreprise
 				.getCode());
@@ -73,21 +66,19 @@ public class BanqueServiceImpl implements BanqueService{
 		return updatedEntr;
 	}
 
-	@Override
 	
 	public Entreprise findEntrepriseById(Long id) {
 
 		return entrepriseRepository.findOne(id);
 	}
 
-	@Override
 	
+	@Transactional(readOnly = false)
 	public Taxe createTaxe(Taxe taxe) {
 
 		return taxeRepository.save(taxe);
 	}
 
-	@Override
 	
 	public Taxe deleteTaxe(Long id) throws TaxeNotFound {
 		Taxe deletedTaxe = taxeRepository.findOne(id);
@@ -97,14 +88,14 @@ public class BanqueServiceImpl implements BanqueService{
 		return deletedTaxe;
 	}
 
-	@Override
+	
 	public List<Taxe> findAllTaxe() {
 
 		return taxeRepository.findAll();
 	}
 
-	@Override
 	
+	@Transactional(readOnly = false)
 	public Taxe updateTaxe(Taxe taxe) throws TaxeNotFound {
 		Taxe updatedTaxe = taxeRepository.findOne(taxe.getNumero());
 		if (updatedTaxe == null)
@@ -116,7 +107,6 @@ public class BanqueServiceImpl implements BanqueService{
 		return updatedTaxe;
 	}
 
-	@Override
 	
 	public Taxe findTaxeById(Long id) {
 

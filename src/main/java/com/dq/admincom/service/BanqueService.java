@@ -9,24 +9,24 @@ import com.dq.admincom.model.Taxe;
 
 public interface BanqueService {
 
-	Entreprise createEntreprise(Entreprise entreprise);
+	public Entreprise createEntreprise(Entreprise entreprise);
 
-	Entreprise deleteEntreprise(Long id) throws EntrepriseNotFound;
+	public Entreprise deleteEntreprise(Long id) throws EntrepriseNotFound;
 
-	List<Entreprise> findAllEntreprise();
+	public List<Entreprise> findAllEntreprise();
 
-	Entreprise update(Entreprise entreprise) throws EntrepriseNotFound;
+	public Entreprise update(Entreprise entreprise) throws EntrepriseNotFound;
 
-	Entreprise findEntrepriseById(Long id);
+	public Entreprise findEntrepriseById(Long id);
 
-	Taxe createTaxe(Taxe taxe);
+	public Taxe createTaxe(Taxe taxe);
 
-	Taxe deleteTaxe(Long id) throws TaxeNotFound;
+	public Taxe deleteTaxe(Long id) throws TaxeNotFound;
 
-	List<Taxe> findAllTaxe();
+	public List<Taxe> findAllTaxe();
 
-	Taxe updateTaxe(Taxe taxe) throws TaxeNotFound;
+	public Taxe updateTaxe(Taxe taxe) throws TaxeNotFound;
 
-	Taxe findTaxeById(Long id);
+	public Taxe findTaxeById(Long id);
 
 }

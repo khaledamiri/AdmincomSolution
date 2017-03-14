@@ -1,9 +1,9 @@
 package com.dq.admincom.model;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
@@ -14,7 +14,12 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonSubTypes;
+import org.codehaus.jackson.annotate.JsonTypeInfo;
 
 /**
  * The persistent class for the taxe database table.
@@ -22,32 +27,40 @@ import javax.persistence.ManyToOne;
  */
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(discriminatorType = DiscriminatorType.STRING, length = 3, name = "TYPE")
-public abstract class Taxe implements Serializable {
+@DiscriminatorColumn(discriminatorType = DiscriminatorType.STRING, length = 2, name = "TYPE")
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
+@JsonSubTypes({
+
+@JsonSubTypes.Type(name = "TVA", value = TVA.class),
+		@JsonSubTypes.Type(name = "IR", value = IR.class)
+
+})
+public class Taxe implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long numero;
-
+	@Temporal(TemporalType.DATE)
 	private Date date;
 
 	private double montant;
 
 	private String titre;
 
-	
+	// bi-directional many-to-one association to Entreprise
 
-	//bi-directional many-to-one association to Entreprise
 	@ManyToOne
-	@JoinColumn(name="code_entr")
+	@JoinColumn(name = "code_entr")
 	private Entreprise entreprise;
+
+	@Column(name = "type", insertable = false, updatable = false)
+	private String type;
 
 	public Taxe() {
 	}
 
-	public Taxe(Date date, double montant, String titre,
-			Entreprise entreprise) {
+	public Taxe(Date date, double montant, String titre, Entreprise entreprise) {
 		super();
 		this.date = date;
 		this.montant = montant;
@@ -87,13 +100,20 @@ public abstract class Taxe implements Serializable {
 		this.titre = titre;
 	}
 
-
 	public Entreprise getEntreprise() {
 		return this.entreprise;
 	}
 
 	public void setEntreprise(Entreprise entreprise) {
 		this.entreprise = entreprise;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 }
