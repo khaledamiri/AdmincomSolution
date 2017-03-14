@@ -120,6 +120,7 @@
 			<version>1.9.10</version>
 		</dependency>
 
+
 		<!-- admincom Utils <dependency> <groupId>com.dq.admincom</groupId> <artifactId>NBS_Utils</artifactId> 
 			<version>1.0.0</version> </dependency> <dependency> <groupId>com.dq.admincom</groupId> 
 			<artifactId>NBS_ApplicationUtil</artifactId> <version>1.0.0</version> </dependency> -->
@@ -152,13 +153,6 @@
 			<scope>test</scope>
 		</dependency>
 
-		<!-- Gson -->
-		<dependency>
-			<groupId>com.google.code.gson</groupId>
-			<artifactId>gson</artifactId>
-			<version>2.2.2</version>
-		</dependency>
-
 		<!-- Test -->
 		<dependency>
 			<groupId>junit</groupId>
@@ -185,7 +179,5 @@
 
 		</plugins>
 	</build>
-
-
 
 </project>
