@@ -32,7 +32,7 @@ import org.springframework.web.servlet.view.UrlBasedViewResolver;
 @Configuration
 @ComponentScan("com.dq.admincom")
 @EnableWebMvc
-@EnableJpaRepositories("com.dq.admincom.dao")
+@EnableJpaRepositories("com.dq.admincom.repository")
 @EnableTransactionManagement
 @PropertySource("classpath:application.properties")
 //@PropertySource("file:${catalina.home}/conf/vbw.properties")
@@ -98,7 +98,7 @@ public class WebAppConfig extends WebMvcConfigurerAdapter{
         viewResolver.setViewClass(JstlView.class);
         viewResolver.setPrefix("/WEB-INF/views/");
         viewResolver.setSuffix(".jsp");
-        viewResolver.setSuffix(".html");
+//        viewResolver.setSuffix(".html");
         return viewResolver;
     }
     

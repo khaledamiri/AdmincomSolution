@@ -7,12 +7,12 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
-
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
 /**
  * The persistent class for the entreprise database table.
  * 
@@ -22,8 +22,13 @@ public class Entreprise implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long code;
+	@GeneratedValue(generator = "EntrepriseGenerator") 
+    @GenericGenerator(name = "EntrepriseGenerator", strategy = "com.dq.admincom.identifiergenerator.TableKeyGenerator", parameters =  {
+        @Parameter(name = "key", value = "ENTREPRISE"),
+        @Parameter(name = "prefixe", value = "ESE-")
+    }
+    )
+	private String code;
 
 	private String mail;
 
@@ -39,11 +44,11 @@ public class Entreprise implements Serializable {
 	public Entreprise() {
 	}
 
-	public Long getCode() {
+	public String getCode() {
 		return this.code;
 	}
 
-	public void setCode(Long code) {
+	public void setCode(String code) {
 		this.code = code;
 	}
 
