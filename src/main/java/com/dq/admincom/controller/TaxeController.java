@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class TaxeController {
 	Logger logger = Logger.getLogger(TaxeController.class);
 
-	@RequestMapping(value = { "/tasks", "/" })
+	@RequestMapping(value = { "/taxe" })
 	public String index(Model model) {
-		return "tasks";
+		return "taxes";
 	}
 
 }
